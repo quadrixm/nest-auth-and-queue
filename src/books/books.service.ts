@@ -13,12 +13,12 @@ export class BooksService {
   ) {}
 
   async addBookCSVReadJob(): Promise<Job> {
-    return this.bookQueue.add('read-csv', {
+    return this.bookQueue.add({
       foo: 'bar',
     });
   }
 
-  async getBookCSVReadJob(jobName: string): Promise<Job> {
-    return this.bookQueue.getJob('read-csv');
+  async getBookCSVReadJob(jobId: number): Promise<Job> {
+    return this.bookQueue.getJob(jobId);
   }
 }

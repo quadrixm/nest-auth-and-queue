@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Book {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @Column()
   bookName?: string;
@@ -11,9 +11,9 @@ export class Book {
   @Column()
   author: string;
 
-  @Column()
-  createdAt: string;
+  @Column({ nullable: true })
+  createdAt?: string;
 
-  @Column()
-  publishedAt: string;
+  @Column({ nullable: true })
+  publishedAt?: string;
 }
