@@ -4,9 +4,12 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { BooksService } from './books/books.service';
-import { BooksModule } from './books/books.module';
+import { UsersModule } from 'app/users/users.module';
+import { BooksService } from 'app/books/books.service';
+import { BooksModule } from 'app/books/books.module';
+import { AuthController } from 'app/auth/auth.controller';
+import { BooksController } from 'app/books/books.controller';
+import { AuthService } from 'app/auth/auth.service';
 
 @Module({
   imports: [
@@ -27,6 +30,6 @@ import { BooksModule } from './books/books.module';
     BooksModule,
   ],
   controllers: [AppController],
-  providers: [AppService, BooksService],
+  providers: [AppService],
 })
 export class AppModule {}
