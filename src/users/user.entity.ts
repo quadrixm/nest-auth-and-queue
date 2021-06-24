@@ -3,26 +3,26 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @Column()
   username: string;
 
-  @Column()
+  @Column({ nullable: true })
   password?: string;
 
   @Column()
-  name?: string;
+  name: string;
 
-  @Column()
+  @Column({ nullable: true })
   address?: string;
 
-  @Column()
+  @Column({ nullable: true })
   mobile?: string;
 
   @Column()
-  email?: string;
+  email: string;
 
-  @Column()
+  @Column({ nullable: true })
   status?: string;
 }
