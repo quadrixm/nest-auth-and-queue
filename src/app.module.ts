@@ -5,6 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { BooksService } from './books/books.service';
+import { BooksModule } from './books/books.module';
 
 @Module({
   imports: [
@@ -22,8 +24,9 @@ import { UsersModule } from './users/users.module';
     }),
     AuthModule,
     UsersModule,
+    BooksModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, BooksService],
 })
 export class AppModule {}
