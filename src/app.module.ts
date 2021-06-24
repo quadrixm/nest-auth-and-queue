@@ -5,11 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from 'app/users/users.module';
-import { BooksService } from 'app/books/books.service';
 import { BooksModule } from 'app/books/books.module';
-import { AuthController } from 'app/auth/auth.controller';
-import { BooksController } from 'app/books/books.controller';
-import { AuthService } from 'app/auth/auth.service';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
@@ -24,6 +21,12 @@ import { AuthService } from 'app/auth/auth.service';
       autoLoadEntities: true,
       synchronize: true,
       ssl: false,
+    }),
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
     }),
     AuthModule,
     UsersModule,
