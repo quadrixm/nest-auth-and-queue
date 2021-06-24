@@ -17,4 +17,8 @@ export class BooksService {
       foo: 'bar',
     });
   }
+
+  async getBookCSVReadJob(jobName: string): Promise<Job> {
+    return this.bookQueue.getJob('read-csv');
+  }
 }

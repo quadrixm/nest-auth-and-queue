@@ -5,6 +5,7 @@ import { BooksService } from 'app/books/books.service';
 import { Book } from 'app/books/book.entity';
 import { BullModule } from '@nestjs/bull';
 import { BookConsumer } from 'app/books/book.consumer';
+import { AuthModule } from 'app/auth/auth.module';
 
 @Module({
   imports: [
@@ -12,8 +13,9 @@ import { BookConsumer } from 'app/books/book.consumer';
     BullModule.registerQueue({
       name: 'book',
     }),
+    AuthModule,
   ],
-  providers: [BooksService, BookConsumer],
+  providers: [BooksService],
   controllers: [BooksController],
 })
 export class BooksModule {}

@@ -1,19 +1,26 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Book } from 'app/books/book.entity';
-import { Repository } from 'typeorm';
+import csv from 'csv-parser';
+import fs from 'fs';
 
 @Processor('book')
 export class BookConsumer {
-  constructor(
-    @InjectRepository(Book) private booksRepository: Repository<Book>,
-  ) {}
-
   @Process()
   async transcode(job: Job<any>) {
+    const results = [];
+    fs.createReadStream(`${__dirname}/src/assets/data.csv`)
+      .pipe(csv())
+      .on('data', (data) => results.push(data))
+      .on('end', () => {
+        console.log(results);
+        // [
+        //   { NAME: 'Daffy Duck', AGE: '24' },
+        //   { NAME: 'Bugs Bunny', AGE: '22' }
+        // ]
+      });
+
     let progress = 0;
-    for (let i = 0; i < 100; i++) {
+    for (const result of results) {
       await console.log(job.data);
       progress += 10;
       await job.progress(progress);
