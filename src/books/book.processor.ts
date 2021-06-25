@@ -33,11 +33,12 @@ export class BookProcessor {
           });
       });
       let progress = 0;
+      const totalCount = results.length;
       for (const result of results) {
         const book: Book = { bookName: result.Area, author: result.year };
         await this.booksRepository.save(book);
         progress += 1;
-        await job.progress(progress);
+        await job.progress(Math.round((progress / totalCount) * 100));
       }
       // await fs
       //   .createReadStream(
