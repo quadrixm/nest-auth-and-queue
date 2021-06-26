@@ -15,12 +15,9 @@ export class BookProcessor {
   @Process()
   async readCsv(job: Job) {
     const data = [];
-    // let progress = 0;
     try {
       const results: any[] = await new Promise((resolve, reject) => {
-        fs.createReadStream(
-          '/Users/mohammad/Downloads/Data7602DescendingYearOrder.csv',
-        )
+        fs.createReadStream('absolute path to data.csv file')
           .on('error', (error) => {
             reject(error);
           })
@@ -40,21 +37,6 @@ export class BookProcessor {
         progress += 1;
         await job.progress(Math.round((progress / totalCount) * 100));
       }
-      // await fs
-      //   .createReadStream(
-      //     '/Users/mohammad/Downloads/Data7602DescendingYearOrder.csv',
-      //   )
-      //   .pipe(csv())
-      //   .on('data', async (data) => {
-      //     results.push(data);
-      //   })
-      //   .on('end', () => {
-      //     console.log(results);
-      //     // [
-      //     //   { NAME: 'Daffy Duck', AGE: '24' },
-      //     //   { NAME: 'Bugs Bunny', AGE: '22' }
-      //     // ]
-      //   });
     } catch (e) {
       console.log({ e });
     }

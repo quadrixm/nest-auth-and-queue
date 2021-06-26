@@ -6,13 +6,11 @@ import { BooksService } from 'app/books/books.service';
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
-  // @UseGuards(JwtAuthGuard)
   @Get('read')
   readCsvFile() {
     return this.booksService.addBookCSVReadJob();
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get('job/:id')
   getJobById(@Param() params: { id: number }) {
     return this.booksService.getBookCSVReadJob(params.id);
